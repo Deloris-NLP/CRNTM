@@ -1,0 +1,28 @@
+[0.00] (0.01;0.01;0.00;)carrying pens government fired stick pull sending palestinian tried armed fly ready trying hold hands
+[0.07] (0.07;0.07;0.06;)existence religious christians population religions christianity muslims responsibility lives jews people present believed arab regard
+[-0.01] (-0.03;-0.01;0.01;)turn water away blood small like lot care little car lots patients driving goes putting
+[0.02] (-0.01;0.03;0.03;)ride terminal station commercial bus section nature shuttle traffic road light generally cars track places
+[0.04] (0.03;0.04;0.04;)joe atheism islam belief tom arabs beliefs christianity bob bell austin atlanta children religions muslims
+[0.03] (0.01;0.03;0.04;)sky organizations ride dale plan flame agencies discuss genocide escrow beginning tax begin federal proposed
+[0.04] (0.02;0.05;0.05;)recommend processing programs medical provide research monitor resource program health nsa resources require agencies provides
+[0.06] (0.07;0.05;0.05;)mars institute moon scientific research science park sun cambridge nasa lunar conference astronomy presented earth
+[0.07] (0.09;0.06;0.05;)server mac telephone card file services phone info email users app leading access update user
+[0.03] (0.05;0.01;0.02;)weight ice unit american field 1988 1992 1990 1993 women 1991 men age based canadian
+[0.01] (0.00;0.01;0.02;)colostate moment comp universe thoughts shipping earth auto dealer surely interesting conclusion curious shown humans
+[0.08] (0.10;0.07;0.07;)agencies federal agency file security criminal nsa files government wiretap agents enforcement organizations law documents
+[-0.01] (0.01;-0.02;-0.02;)inside thought way like body exactly probably actually discovered problem come lot taken earth left
+[0.06] (0.07;0.04;0.05;)attorney court judge virginia case criminal arguments trial opinion answer amendment haven comment statements law
+[0.04] (0.05;0.03;0.04;)devices laser device disk surface stuff data machines chips systems bits vga output machine equipment
+[0.06] (0.06;0.06;0.08;)widget app algorithm widgets bios server scsi user cpu interface motherboard ide rom email modem
+[0.07] (0.06;0.08;0.06;)allow expected dollars pressure needed cheaper reduce cost supply require limit costs lower pay increase
+[0.02] (0.02;0.02;0.02;)build needs better need pull drive meant clear choice looking difficult way team needed microsoft
+[0.02] (0.03;0.01;0.01;)boy heard goals mother great man goal pain primary grace dead father john died woman
+[0.18] (0.23;0.18;0.14;)turkey turks armenians jews arab christians armenia holy arabs turkish azerbaijan greek armenian greece meaning
+[0.03] (0.01;0.04;0.03;)gif fonts nasa umd waco version colors versions study christian fbi nsa draw send doctors
+[0.05] (0.06;0.04;0.04;)russian russia oil agency nearly gas spent soviet arms missing german ago germany nuclear azerbaijan
+[0.03] (0.05;0.03;0.02;)guns funny shoot assault gun dangerous weapon solution innocent science men shooting bunch punishment institute
+[-0.00] (-0.03;0.01;0.01;)considered responsible rich example article country bring government case bitnet according non possibly fact death
+[0.11] (0.13;0.11;0.08;)scripture atheism jesus religion christianity religions christ bible beliefs biblical god faith homosexuality islam understanding
+==========================================================================
+Average Topic Coherence = 0.043
+Median Topic Coherence = 0.036
