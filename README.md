@@ -26,9 +26,9 @@ We provide two dataset in this respository: 20NewsGroup and Snippets, in which [
 | NVCTM            | 60 epoch (0.50h)            |
 | DVAE             | 30 epoch (0.34h)            |
 | CRNTM_GD         | 17 epoch (0.25h)            |
-| CRNTM_GSD (M=25) | 20 epoch  (1.9h)            |
+| CRNTM_GMD (M=25) | 20 epoch  (1.9h)            |
 
-**PS**：It is noting that NVDM, GSM, NVCTM, CRNTM_GD and CRNTM_GSD use wake-sleep algorithm[[1]](#ref1) for training process, which cost more time to finish one epoch than other baselines, such NVLDA, ProLDA and DVAE.
+**PS**：It is noting that NVDM, GSM, NVCTM, CRNTM_GD and CRNTM_GMD use wake-sleep algorithm[[1]](#ref1) for training process, which cost more time to finish one epoch than other baselines, such NVLDA, ProLDA and DVAE.
 
 
 
