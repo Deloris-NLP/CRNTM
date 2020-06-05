@@ -34,9 +34,9 @@ We provide two dataset in this respository: 20NewsGroup and Snippets, in which [
 
 ### 3. Grid Parameters Searching
 
-​	In the experiment part, for each baseline, we follow the authors’ setting.  For Gaussian mixture components number $M$ of CRNTM_GMD, we find the Gaussian mixture components number by a grid-search with a search scope of $\{5, 10, 15, 20, 25, 30, 35\}$. Table 6 in paper shows the search results, and best values of the hyper-parameters. 
+​	In the experiment part, for each baseline, we follow the authors’ setting.  For Gaussian mixture components number $M$ of CRNTM_GMD, we find the Gaussian mixture components number by a grid-search with a search scope of $\{5, 10, 15, 20, 25, 30, 35\}$. Table 6 in paper shows the search results, and the best values of the hyper-parameters. 
 
-**PS**: To better review the capacity of CRNTM, we run it 5 times under the same group of parameters and present the averager result on the testing set.
+**PS**: To better review the capacity of CRNTM, we run it 5 times under the same group of parameters and present the average result on the testing set.
 
 
 
