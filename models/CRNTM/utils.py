@@ -118,79 +118,6 @@ def data_set(data_url):
       word_count.append(count)
   return data, word_count
 
-def data_sent_set_1(data_url, vocab_size=2000, max_sent_num=0, max_sent_length=50, data_type=1):
-  data = []
-  text = read_file(data_url)
-  if data_type == 0:
-    for line in text:
-      segs = line.split('\t')
-      sents = segs[1].split(';')
-      doc = np.zeros([max_sent_num, vocab_size])
-      for i, sent in enumerate(sents):
-        if i >= max_sent_num:
-          break
-        words = sent.split()
-        for word_id in words:
-          doc[i, int(word_id)-1] = 1
-      data.append(doc)
-    data = np.array(data)
-  elif data_type==1:
-    for line in text:
-      segs = line.split('\t')
-      sents = segs[1].split(';')
-      doc = np.ones([max_sent_num, max_sent_length])
-      doc = -1*doc
-      for i, sent in enumerate(sents):
-        if i >= max_sent_num:
-          break
-        words = sent.split()
-        for k, word_id in enumerate(words):
-          if k >= max_sent_length:
-            break
-          doc[i, k] = int(word_id)-1
-      data.append(doc)
-    data = np.array(data)
-  return data
-
-def data_sent_set_2(data_url, vocab_size=2000, max_sent_num=0, max_sent_length=50, data_type=1):
-  data = []
-  text = read_file(data_url)
-  for line in text:
-      doc = []
-      segs = line.split('\t')
-      sents = segs[1].split(';')
-      for i, sent in enumerate(sents):
-        words = sent.split()
-        for word_id in words:
-          doc.append(int(word_id))
-      data.append(doc)
-  return data
-
-# def Bow2Embedding(data, embedding_table={}, max_doc_length=50, embedding_size=300, output_path='', vocabulary=[]):
-#   if os.path.exists(output_path):
-#     data2embedding = pickle.load(open(output_path, 'rb'))
-#   else:
-#     data2embedding = []
-#     # vocab_size = len(vocabulary)
-#     for doc in data:
-#       doc_vec = np.zeros([max_doc_length, embedding_size])
-#       idx = 0
-#       for word_id in doc:
-#         freq = doc[word_id]
-#         end = idx+freq
-#         if end <= max_doc_length:
-#           doc_vec[idx:end] = np.tile(embedding_table[word_id], [freq, 1])
-#           idx = end
-#         else:
-#           end = max_doc_length
-#           doc_vec[idx:end] = np.tile(embedding_table[word_id], [end-idx, 1])
-#           break
-#       data2embedding.append(doc_vec)
-#     data2embedding = np.array(data2embedding)
-#     pickle.dump(data2embedding, open(output_path, 'wb'))
-#   return data2embedding
-
-
 def get_vocab(data_url):
   """process data input."""
   vocab = []
@@ -242,82 +169,6 @@ def fetch_data(data, count, idx_batch, vocab_size):
   # data_batch = np.transpose(np.transpose(data_batch)/(data_batch.sum(axis=1)+0.01))
   return data_batch, count_batch, mask
 
-def fetch_embedding_data(data, max_doc_length, embedding_size, count, idx_batch, vocab_size, embedding_table):
-  """fetch input data by batch."""
-  batch_size = len(idx_batch)
-  # [data_size, max_doc_length, embedding_size] = data.shape
-  data_batch = np.zeros((batch_size, max_doc_length, embedding_size))
-  count_batch = []
-  mask = np.zeros(batch_size)
-  for i, doc_id in enumerate(idx_batch):
-    if doc_id != -1:
-      # vocab_size = len(vocabulary)
-      for k, word_id in enumerate(data[doc_id]):
-        if k < max_doc_length:
-          data_batch[i][k] = embedding_table[word_id-1]
-        else:
-          break
-      count_batch.append(count[doc_id])
-      mask[i] = 1.0
-    else:
-      count_batch.append(0)
-  return data_batch, count_batch, mask
-
-def fetch_embedding_data_2(data, max_doc_length,embedding_size, count, idx_batch, vocab_size=2000, embedding_table=None):
-  """fetch input data by batch."""
-  batch_size = len(idx_batch)
-  # [data_size, max_doc_length, embedding_size] = data.shape
-  data_batch = np.zeros((batch_size, max_doc_length))
-  count_batch = []
-  mask = np.zeros(batch_size)
-  for i, doc_id in enumerate(idx_batch):
-    if doc_id != -1:
-      # vocab_size = len(vocabulary)
-      for k, word_id in enumerate(data[doc_id]):
-        if k < max_doc_length:
-          data_batch[i][k] = word_id
-        else:
-          break
-      count_batch.append(count[doc_id])
-      mask[i] = 1.0
-    else:
-      count_batch.append(0)
-  return data_batch, count_batch, mask
-
-def fetch_context_data(data, max_doc_length,embedding_size, count, idx_batch, vocab_size=2000, embedding_table=None):
-  """fetch input data by batch."""
-  batch_size = len(idx_batch)
-  # [data_size, max_doc_length, embedding_size] = data.shape
-  context_batch = np.zeros((batch_size, max_doc_length, vocab_size))
-  target_batch = np.zeros((batch_size, max_doc_length, vocab_size))
-  count_batch = []
-  mask = np.zeros(batch_size)
-  for i, doc_id in enumerate(idx_batch):
-    if doc_id != -1:
-      # vocab_size = len(vocabulary)
-      max_length = min(max_doc_length, len(data[doc_id]))
-      for k in range(max_length):
-        word_id = data[doc_id][k] -1
-        context_batch[i][0][word_id] = 1
-      # context_batch[i][:max_length][:] = np.tile(context_batch[i][0], max_length)
-      for k in list(range(1, max_length))+[0]:
-        word_id = data[doc_id][k] -1
-        context_batch[i][k] = context_batch[i][0]
-        context_batch[i][k][word_id] = 0
-        target_batch[i][k][word_id] = 1
-      count_batch.append(count[doc_id])
-      mask[i] = 1.0
-    else:
-      count_batch.append(0)
-  return context_batch, target_batch, count_batch, mask
-
-
-def fetch_sent_data(data, idx_batch):
-  """fetch input data by batch."""
-  data_batch = np.array(data[idx_batch,:,:])
-  # print(type(data_batch))
-  return data_batch
-
 def variable_parser(var_list, prefix):
   """return a subset of the all_variables by prefix."""
   ret_list = []
@@ -365,43 +216,6 @@ def linear(inputs,
   else:
     return output
 
-def mlp_cnn(inputs,
-              mlp_hidden=[],
-              mlp_nonlinearity=tf.nn.tanh,
-              scope=None,
-              kernel_size=None,
-              strides=None,
-              padding='VALID',
-              ):
-  if kernel_size is None:
-    kernel_size = [1, 100]
-  with tf.variable_scope(scope or 'CNN'):
-    mlp_layer = len(mlp_hidden)
-    res = inputs
-    for l in range(mlp_layer):
-      res = tf.layers.conv2d(
-        inputs=res,
-        filters=32,
-        kernel_size=kernel_size,
-        strides=strides,
-        padding=padding,
-        activation=mlp_nonlinearity,
-        name='c'+str(l)
-      )
-    dims = res.shape
-    # print('kernel_size', dims)
-    res = tf.reshape(tensor=res, shape=[-1, dims[1] * dims[2] * dims[3]])  # flatten
-    # res = tf.layers.dense(
-    #   inputs=res,
-    #   units=mlp_hidden[l],
-    #   activation=mlp_nonlinearity,
-    #   use_bias=True,
-    #   name='l' + str(l)
-    # )
-
-    return res
-
-
 def mlp_dense(inputs,
               mlp_hidden=[],
               mlp_nonlinearity=tf.nn.relu,
@@ -419,48 +233,6 @@ def mlp_dense(inputs,
         name='l' + str(l)
       )
     return res
-
-
-def mlp_bilstm(inputs,
-              mlp_hidden=[],
-              mlp_nonlinearity=tf.nn.relu,
-              hidden_dim=128,
-              max_doc_length=None,
-              scope=None,
-              flag = 'last_ht'):
-  # lstm_cell_fw = contrib.rnn.LSTMCell(hidden_dim)
-  # lstm_cell_bw = contrib.rnn.LSTMCell(hidden_dim)
-  # out, state = tf.nn.bidirectional_dynamic_rnn(cell_fw=lstm_cell_fw, cell_bw=lstm_cell_bw, inputs=inputs,
-  #                                              sequence_length=max_doc_length, dtype=tf.float32)
-  # fw_out,bw_out = out
-  # fw_state, bw_state = state
-  #
-  # bi_out = fw_state
-  # if flag == 'all_ht':
-  #   out = bi_out
-  # if flag == 'first_ht':
-  #   out = bi_out[:, 0, :]
-  # if flag == 'last_ht':
-  #   out = bi_out.h
-  # if flag == 'concat':
-  #   out = tf.concat([bi_out[:, 0, :], tf.concat([state[0].h, state[1].h], 1)], 1)
-  inputs = tf.unstack(inputs, max_doc_length, 1)
-  lstm_cell = rnn.BasicLSTMCell(hidden_dim, forget_bias=1.0)
-  outputs, states = rnn.static_rnn(lstm_cell, inputs, dtype=tf.float32)
-  out = outputs[-1]
-
-  for l in range(len(mlp_hidden)):
-    out = tf.layers.dense(
-      inputs=out,
-      units=mlp_hidden[l],
-      activation=mlp_nonlinearity,
-      use_bias=True,
-      name='l' + str(l)
-    )
-
-  return out
-
-
 
 def mlp(inputs, 
         mlp_hidden=[], 
