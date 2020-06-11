@@ -42,7 +42,7 @@ The hyperparameter values of our models are detailed in the source code `models/
 
 
 
-<div id="ref1"> [1] Geoffrey EHinton, Peter Dayan, Brendan JFrey, and Radford MNeal. 1995. The "wake-sleep" algorithm for unsupervised neural networks. Science 268, 5214 (1995), 1158–1161. </div>
+<div id="ref1"> [1] Geoffrey E Hinton, Peter Dayan, Brendan J Frey, and Radford M Neal. 1995. The "wake-sleep" algorithm for unsupervised neural networks. Science 268, 5214 (1995), 1158–1161. </div>
 
 
 
